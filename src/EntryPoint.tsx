@@ -4,7 +4,7 @@ type Props = {}
 
 const EntryPoint = (props: Props) => {
   return (
-    <div>EntryPoint</div>
+    <div>Entry</div>
   )
 }
 
