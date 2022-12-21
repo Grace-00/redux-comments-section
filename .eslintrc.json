@@ -11,8 +11,8 @@
     "rules": {
       "react/jsx-uses-vars": "error",
       "react/jsx-uses-react": "error",
-      "semi": ["error", "never"],
-      "space-in-parens": ["error", "always", { "exceptions": [ "{}" ] }],
+      //"semi": ["error", "never"],
+     // "space-in-parens": ["error", "always", { "exceptions": [ "{}" ] }],
       "@typescript-eslint/member-delimiter-style": ["error", {
         "multiline": {
           "delimiter": "none",

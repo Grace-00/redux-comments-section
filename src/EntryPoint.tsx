@@ -1,10 +1,24 @@
 import React from 'react'
+import { useAppSelector } from './redux/selectors'
+import CommentComponent from './components/CommentComponent'
+import User from './components/User'
 
-type Props = {}
 
-const EntryPoint = ( props: Props ) => {
+const EntryPoint: React.FC = () => {
+  const comments = useAppSelector(state => state.data?.comments) 
+
+  console.log( comments)
+
   return (
-    <div>Entry</div>
+    <>
+     {comments?.map((comment) => {
+      return  (
+      <CommentComponent key={comment.id}>
+        <User user={comment.user}/>
+      </CommentComponent>
+      )
+     })}
+    </>
   )
 }
 
