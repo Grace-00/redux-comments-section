@@ -1,3 +1,3 @@
-import Vote from "./Vote";
+import Rating from "./Rating";
 
-export { Vote }
+export { Rating }

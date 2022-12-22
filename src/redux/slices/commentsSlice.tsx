@@ -48,8 +48,19 @@ const commentsSlice = createSlice({
     name: 'comments',
     initialState: initialState,
     reducers: {
-
+        upvoteComment: (state) => {
+            console.log('getting array of scores',state.data?.comments.map(comment => comment.score += 1))
+            state.data?.comments.map(comment => comment.score += 1)
+        },
+        downvoteComment: (state) => {
+            state.data?.comments.map(comment => comment.score -= 1)
+        },
     },
 })
+
+export const {
+    upvoteComment,
+    downvoteComment
+} = commentsSlice.actions
 
 export default commentsSlice.reducer

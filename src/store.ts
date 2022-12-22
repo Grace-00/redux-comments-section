@@ -2,10 +2,10 @@ import { configureStore } from '@reduxjs/toolkit'
 import thunk from 'redux-thunk'
 import { logger } from 'redux-logger'
 
-import commentsSlice from './redux/slices/commentsSlice'
+import commentsReducer from './redux/slices/commentsSlice'
 
 export const store = configureStore({
-  reducer: commentsSlice,
+  reducer: commentsReducer,
   middleware: [thunk, logger],
 })
 
