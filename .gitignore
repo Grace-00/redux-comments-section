@@ -6,4 +6,5 @@ dist/
 .vscode/
 src/design/
 src/images/
+static/
 TODO.md

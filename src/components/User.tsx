@@ -7,7 +7,10 @@ interface UserProps {
 
 const User = (props: UserProps) => {
   return (
-    <div>{props.user.username}</div>
+    <div>
+      <img src={`./image-${props.user.username}.png`} alt={props.user.username}/>
+      {props.user.username}
+    </div>
   )
 }
 
