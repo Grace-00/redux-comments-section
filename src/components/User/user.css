@@ -1,0 +1,16 @@
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-name {
+    color: hsl(212, 24%, 26%);
+    font-weight: 500;
+    line-height: 18.96px;
+}
+
+.user-img {
+    height: 32;
+    width: 32;
+}

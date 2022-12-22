@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAppSelector } from './redux/selectors'
-import CommentComponent from './components/CommentComponent'
+import { Comment } from './components/Comment'
 
 
 const EntryPoint: React.FC = () => {
@@ -10,11 +10,14 @@ const EntryPoint: React.FC = () => {
     <>
       {initialComments?.map((comment) => {
         return (
-          <CommentComponent
-            key={comment.id}
-            user={comment.user}
-            content={comment.content}
-          />
+          <div className='app'>
+            <Comment
+              key={comment.id}
+              user={comment.user}
+              content={comment.content}
+              createdAt={comment.createdAt}
+            />
+          </div>
         )
       })}
     </>
