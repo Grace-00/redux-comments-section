@@ -1,14 +1,16 @@
 import React from 'react'
-
+import User from './User'
 interface CommentComponentProps {
-  readonly children: React.ReactNode
+  readonly content: string
+  readonly user: User
 }
 
 
 const CommentComponent = (props: CommentComponentProps) => {
   return (
     <>
-      {props.children}
+    <User user={props.user} />
+    <p>{props.content}</p>
     </>
   )
 }
