@@ -17,7 +17,7 @@ body {
     margin: 16;
 }
 
-.app {
+.comment-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;

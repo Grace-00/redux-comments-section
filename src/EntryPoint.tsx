@@ -10,12 +10,13 @@ const EntryPoint: React.FC = () => {
     <>
       {initialComments?.map((comment) => {
         return (
-          <div className='app'>
+          <div className='comment-wrapper'>
             <Comment
               key={comment.id}
               user={comment.user}
               content={comment.content}
               createdAt={comment.createdAt}
+              score={comment.score}
             />
           </div>
         )

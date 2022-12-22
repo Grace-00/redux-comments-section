@@ -1,0 +1,14 @@
+.vote {
+    color: hsl(238, 40%, 52%);
+    background-color: hsl(228, 33%, 97%);
+    font-weight: 500;
+    line-height: 18.96px;
+    width: 100;
+    border-radius: 8;
+    padding: 10 10;
+    margin-top: 16;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    cursor: pointer;
+}
