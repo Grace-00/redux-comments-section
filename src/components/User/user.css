@@ -14,3 +14,15 @@
     height: 32;
     width: 32;
 }
+
+.currentUser-tag {
+    background-color: hsl(238, 40%, 52%);
+    color: hsl(0, 0%, 100%);
+    margin-left: 8;
+    padding: 1 7 3 6;
+    font-size: 13;
+    line-height: 15.41px;
+    font-weight: 500;
+    border-radius: 4;
+    text-align: center;
+}
