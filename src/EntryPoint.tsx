@@ -17,6 +17,7 @@ const EntryPoint: React.FC = () => {
               content={comment.content}
               createdAt={comment.createdAt}
               score={comment.score}
+              replies={comment.replies}
             />
           </div>
         )

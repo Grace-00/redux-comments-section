@@ -16,7 +16,7 @@ export interface User {
     username: string
 }
 
-type Replies = Omit<Comment, 'replies'> & { replyingTo: string }
+export type Replies = Omit<Comment, 'replies'> & { replyingTo: string }
 
 export interface Data {
     currentUser: User
@@ -50,6 +50,13 @@ const commentsSlice = createSlice({
     reducers: {
         upvoteComment: (state, action) => {
             state.data?.comments.map(comment => {
+                if (comment.replies.length > 0) {
+                    comment.replies.map(reply => {
+                        if(reply.id === action.payload) {
+                            reply.score += 1
+                        }
+                    })
+                }
                 if (comment.id === action.payload) {
                         comment.score += 1
                 }
@@ -57,6 +64,15 @@ const commentsSlice = createSlice({
         },
         downvoteComment: (state, action) => {
             state.data?.comments.map(comment => {
+                if (comment.replies.length > 0) {
+                    comment.replies.map(reply => {
+                        if(reply.id === action.payload) {
+                            if(reply.score > 0) {
+                                reply.score -= 1
+                            }
+                        }
+                    })
+                }
                 if (comment.id === action.payload) {
                     if(comment.score > 0) {
                         comment.score -= 1
