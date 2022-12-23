@@ -1,6 +1,6 @@
 import React from 'react'
 import { User } from '../User'
-import { Rating } from '../Vote'
+import { Rating } from '../Rating'
 import { Reply } from '../Reply'
 import { Button } from '../Button'
 import { useAppDispatch } from '../../redux/selectors'
@@ -37,7 +37,7 @@ const Comment = (props: CommentProps) => {
           </div>
           {props.replies.length > 0 && props.replies?.map((reply) => {
             return (
-            <>
+            <div key={reply.id}>
               <User user={reply.user} createdAt={reply.createdAt} />
               <p style={{ paddingTop: 16 }}>{reply.content}</p>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -48,7 +48,7 @@ const Comment = (props: CommentProps) => {
                 </Rating>
                 <Reply />
               </div>
-            </>
+            </div>
           )})
           }
         </>
