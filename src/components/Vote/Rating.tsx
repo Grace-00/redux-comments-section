@@ -1,12 +1,12 @@
 import React from 'react'
 import './rating.css'
 
-interface VoteProps {
+interface RatingProps {
   readonly children: React.ReactNode
   readonly className: string
 }
 
-const Rating = (props: VoteProps) => {
+const Rating = (props: RatingProps) => {
   return (
     <div className={props.className}>{props.children}</div>
   )

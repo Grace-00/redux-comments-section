@@ -48,12 +48,19 @@ const commentsSlice = createSlice({
     name: 'comments',
     initialState: initialState,
     reducers: {
-        upvoteComment: (state) => {
-            console.log('getting array of scores',state.data?.comments.map(comment => comment.score += 1))
-            state.data?.comments.map(comment => comment.score += 1)
+        upvoteComment: (state, action) => {
+            state.data?.comments.map(comment => {
+                if (comment.id === action.payload) {
+                    comment.score += 1
+                }
+            })
         },
-        downvoteComment: (state) => {
-            state.data?.comments.map(comment => comment.score -= 1)
+        downvoteComment: (state, action) => {
+            state.data?.comments.map(comment => {
+                if (comment.id === action.payload) {
+                    comment.score -= 1
+                }
+            })
         },
     },
 })
