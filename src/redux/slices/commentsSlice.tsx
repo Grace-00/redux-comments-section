@@ -51,14 +51,16 @@ const commentsSlice = createSlice({
         upvoteComment: (state, action) => {
             state.data?.comments.map(comment => {
                 if (comment.id === action.payload) {
-                    comment.score += 1
+                        comment.score += 1
                 }
             })
         },
         downvoteComment: (state, action) => {
             state.data?.comments.map(comment => {
                 if (comment.id === action.payload) {
-                    comment.score -= 1
+                    if(comment.score > 0) {
+                        comment.score -= 1
+                    }
                 }
             })
         },
