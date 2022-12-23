@@ -41,10 +41,9 @@ const Comment = (props: CommentProps) => {
         return (
           <div className='comment reply' key={reply.id}>
             <User user={reply.user} createdAt={reply.createdAt} />
-            {reply.replyingTo ?
+            {reply.replyingTo &&
               <p style={{ paddingTop: 16 }}>
-                <span style={{ color: 'hsl(238, 40%, 52%)', fontWeight: 500 }}>@{reply.replyingTo}</span> {reply.content}</p> :
-              <p style={{ paddingTop: 16 }}>{reply.content}</p>
+                <span style={{ color: 'hsl(238, 40%, 52%)', fontWeight: 500 }}>@{reply.replyingTo}</span> {reply.content}</p>
             }
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <Rating className='rating-wrapper'>
@@ -58,7 +57,6 @@ const Comment = (props: CommentProps) => {
         )
       })
       }
-
     </>
 
   )
