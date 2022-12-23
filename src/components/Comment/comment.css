@@ -3,5 +3,8 @@
     padding: 16;
     margin-bottom: 16;
     background-color: hsl(0, 0%, 100%);
-    max-width: 730;
+}
+
+.reply {
+    margin-left: 34;
 }
