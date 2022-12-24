@@ -11,7 +11,7 @@ const Button = (props: ButtonProps) => {
     
   return (
     <button className={props.className} onClick={props.onClick}>
-        <img src={props.icon} alt='icon' />
+        <img src={props.icon} alt='icon' style={{cursor: 'pointer'}}/>
         {props.buttonName ? <h4>{props.buttonName}</h4> : ''}
     </button>
   )
