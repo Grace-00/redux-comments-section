@@ -4,11 +4,11 @@ import { Comment } from './components/Comment'
 
 
 const EntryPoint: React.FC = () => {
-  const initialComments = useAppSelector(state => state.data?.comments)
+  const getInitialComments = useAppSelector(state => state.data?.comments)
 
   return (
     <>
-      {initialComments?.map((comment) => {
+      {getInitialComments?.map((comment) => {
         return (
           <div className='comment-wrapper' key={comment.id}>
             <Comment

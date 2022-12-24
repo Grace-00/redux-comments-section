@@ -2,14 +2,30 @@
     line-height: 0;
 }
 
-.reply-button {
-    color: hsl(238, 40%, 52%);
-    font-weight: 500;
+.reply-button,
+.edit-button,
+.delete-button {
     margin-top: 16;
     background: none;
-    width: 66;
     cursor: pointer;
     display: flex;
-    align-items: center;
+    width: 66;
+}
+
+.reply-button, .edit-button {
+    color: hsl(238, 40%, 52%);
+}
+
+.edit-button,
+.delete-button {
+    justify-content: space-evenly;
+}
+
+.delete-button {
+    color: hsl(358, 79%, 66%);
+}
+
+.reply-button {
     justify-content: space-around;
+    align-items: center;  
 }

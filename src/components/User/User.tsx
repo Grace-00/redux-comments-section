@@ -1,6 +1,7 @@
 import React from 'react'
 import { useAppSelector } from '../../redux/selectors'
 import { User } from '../../redux/slices/commentsSlice'
+import { isCurrentUser } from '../../utils'
 import './user.css'
 
 
@@ -10,18 +11,15 @@ interface UserProps {
 }
 
 const User = (props: UserProps) => {
-  const currentUser = useAppSelector(state => state.data?.currentUser.username)
-
-  const isCurrentUser = (username: string) => {
-    return currentUser === username ? 
-    (<p className='user-name'>{username} <span className='currentUser-tag'>you</span></p>) : 
-    (<p className='user-name'>{username}</p>)
-  }
+  const getCurrentUser = useAppSelector(state => state.data?.currentUser.username)
 
   return (
     <div className='user'>
       <img src={`./image-${props.user.username}.png`} alt={props.user.username} className='user-img'/>
-      {isCurrentUser(props.user.username)}
+      {isCurrentUser(getCurrentUser, props.user.username) ?
+      <p className='user-name'>{props.user.username} <span className='currentUser-tag'>you</span></p> :
+      <p className='user-name'>{props.user.username}</p>
+    }
       <p>{props.createdAt}</p>
     </div>
   )

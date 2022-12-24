@@ -5,6 +5,7 @@ interface ButtonProps {
     readonly onClick: () => void
     readonly className: string
     readonly buttonName?: string
+    readonly username?: string
 }
 
 const Button = (props: ButtonProps) => {

@@ -4,9 +4,10 @@ import { User } from '../User'
 import { Rating } from '../Rating'
 import { Button } from '../Button'
 import { Content } from '../Content'
-import { useAppDispatch } from '../../redux/selectors'
+import { useAppDispatch, useAppSelector } from '../../redux/selectors'
 import { upvoteComment, downvoteComment, Replies } from '../../redux/slices/commentsSlice'
 import './comment.css'
+import { isCurrentUser } from '../../utils'
 
 
 interface CommentProps {
@@ -21,6 +22,7 @@ interface CommentProps {
 
 const Comment = (props: CommentProps) => {
   const dispatch = useAppDispatch()
+  const getCurrentUser = useAppSelector(state => state.data?.currentUser.username)
 
   return (
 
@@ -49,7 +51,13 @@ const Comment = (props: CommentProps) => {
                 <h4>{reply.score}</h4>
                 <Button className='icon-button' icon={`./icon-minus.svg`} onClick={() => dispatch(downvoteComment(reply.id))} />
               </Rating>
-              <Button className='reply-button' icon={`./icon-reply.svg`} buttonName='Reply' onClick={() => { }} />
+              {isCurrentUser(getCurrentUser, reply.user.username) ?
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <Button className='delete-button' icon={`./icon-delete.svg`} buttonName='Delete' onClick={() => { }} />
+                  <Button className='edit-button' icon={`./icon-edit.svg`} buttonName='Edit' onClick={() => { }} />
+                </div> :
+                <Button className='reply-button' icon={`./icon-reply.svg`} buttonName='Reply' onClick={() => { }} />
+              }
             </div>
           </div>
         )
