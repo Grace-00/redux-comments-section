@@ -3,6 +3,7 @@ import React from 'react'
 import { User } from '../User'
 import { Rating } from '../Rating'
 import { Button } from '../Button'
+import { Content } from '../Content'
 import { useAppDispatch } from '../../redux/selectors'
 import { upvoteComment, downvoteComment, Replies } from '../../redux/slices/commentsSlice'
 import './comment.css'
@@ -26,7 +27,7 @@ const Comment = (props: CommentProps) => {
     <>
       <div className='comment'>
         <User user={props.user} createdAt={props.createdAt} />
-        <p style={{ paddingTop: 16 }}>{props.content}</p>
+        <Content content={props.content} />
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Rating className='rating-wrapper'>
             <Button className='icon-button' icon={`./icon-plus.svg`} onClick={() => dispatch(upvoteComment(props.commentId))} />
@@ -41,10 +42,7 @@ const Comment = (props: CommentProps) => {
         return (
           <div className='comment reply' key={reply.id}>
             <User user={reply.user} createdAt={reply.createdAt} />
-            {reply.replyingTo &&
-              <p style={{ paddingTop: 16 }}>
-                <span style={{ color: 'hsl(238, 40%, 52%)', fontWeight: 500 }}>@{reply.replyingTo}</span> {reply.content}</p>
-            }
+            <Content content={reply.content} replyingTo={reply.replyingTo} />
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <Rating className='rating-wrapper'>
                 <Button className='icon-button' icon={`./icon-plus.svg`} onClick={() => dispatch(upvoteComment(reply.id))} />
