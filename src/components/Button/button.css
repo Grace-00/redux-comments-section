@@ -1,0 +1,17 @@
+.icon-button {
+    background: 'none';
+    cursor: 'pointer';
+    line-height: 0;
+}
+
+.reply-button {
+    color: hsl(238, 40%, 52%);
+    font-weight: 500;
+    margin-top: 16;
+    background: none;
+    width: 66;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

@@ -1,15 +1,18 @@
 import React from 'react'
-
+import './button.css'
 interface ButtonProps {
-    readonly scoreIcon: string
+    readonly icon: string
     readonly onClick: () => void
+    readonly className: string
+    readonly buttonName?: string
 }
 
 const Button = (props: ButtonProps) => {
     
   return (
-    <button style={{background: 'none', cursor: 'pointer', lineHeight: 0}} onClick={props.onClick}>
-        <img src={props.scoreIcon} alt='scoreIcon' />
+    <button className={props.className} onClick={props.onClick}>
+        <img src={props.icon} alt='icon' />
+        {props.buttonName ? <h4>{props.buttonName}</h4> : ''}
     </button>
   )
 }
