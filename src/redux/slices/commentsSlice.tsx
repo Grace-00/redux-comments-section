@@ -80,12 +80,21 @@ const commentsSlice = createSlice({
                 }
             })
         },
+        deleteComment: (state, action) => {
+            state.data?.comments.map(comment => {
+                if (comment.replies.length > 0) {                    
+                    const filteredReplies = comment.replies.filter(reply => reply.id !== action.payload)
+                    state.data?.comments.map(comment => comment.replies = filteredReplies)
+                }
+            })
+        },
     },
 })
 
 export const {
     upvoteComment,
-    downvoteComment
+    downvoteComment,
+    deleteComment,
 } = commentsSlice.actions
 
 export default commentsSlice.reducer
