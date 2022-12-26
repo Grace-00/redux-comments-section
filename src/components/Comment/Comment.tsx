@@ -51,10 +51,15 @@ const Comment = (props: CommentProps) => {
                 <Button className='icon-button' icon={`./icon-minus.svg`} onClick={() => dispatch(downvoteComment(reply.id))} />
               </Rating>
               {isCurrentUser(getCurrentUser, reply.user.username) ?
+              <>
+                {reply.isEditable ?
+                <Button onClick={() => {}} className='update-button' buttonName='UPDATE' /> :
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <Button className='delete-button' icon={`./icon-delete.svg`} buttonName='Delete' onClick={() => dispatch(deleteComment(reply.id))} />
                   <Button className='edit-button' icon={`./icon-edit.svg`} buttonName='Edit' onClick={() =>  dispatch(editComment({replyId: reply.id, isEditable: true}))} />
-                </div> :
+                </div> }
+              </>
+                :
                 <Button className='reply-button' icon={`./icon-reply.svg`} buttonName='Reply' onClick={() => { }} />
               }
             </div>

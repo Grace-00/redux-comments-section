@@ -29,3 +29,11 @@
     justify-content: space-around;
     align-items: center;  
 }
+
+.update-button {
+    background-color: hsl(238, 40%, 52%);
+    color: hsl(0, 0%, 100%);
+    padding: 10 17;
+    border-radius: 8;
+    cursor: pointer;
+}
