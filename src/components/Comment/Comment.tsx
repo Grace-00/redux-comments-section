@@ -5,7 +5,7 @@ import { Rating } from '../Rating'
 import { Button } from '../Button'
 import { Content } from '../Content'
 import { useAppDispatch, useAppSelector } from '../../redux/selectors'
-import { Replies, upvoteComment, downvoteComment, deleteComment } from '../../redux/slices/commentsSlice'
+import { Replies, upvoteComment, downvoteComment, deleteComment, editComment } from '../../redux/slices/commentsSlice'
 import './comment.css'
 import { isCurrentUser } from '../../utils'
 
@@ -18,7 +18,6 @@ interface CommentProps {
   readonly commentId: number
   readonly replies: Replies[]
 }
-
 
 const Comment = (props: CommentProps) => {
   const dispatch = useAppDispatch()
@@ -44,7 +43,7 @@ const Comment = (props: CommentProps) => {
         return (
           <div className='comment reply' key={reply.id}>
             <User user={reply.user} createdAt={reply.createdAt} />
-            <Content content={reply.content} replyingTo={reply.replyingTo} />
+            <Content content={reply.content} replyingTo={reply.replyingTo} isEditable={reply.isEditable}/>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <Rating className='rating-wrapper'>
                 <Button className='icon-button' icon={`./icon-plus.svg`} onClick={() => dispatch(upvoteComment(reply.id))} />
@@ -54,7 +53,7 @@ const Comment = (props: CommentProps) => {
               {isCurrentUser(getCurrentUser, reply.user.username) ?
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <Button className='delete-button' icon={`./icon-delete.svg`} buttonName='Delete' onClick={() => dispatch(deleteComment(reply.id))} />
-                  <Button className='edit-button' icon={`./icon-edit.svg`} buttonName='Edit' onClick={() => { }} />
+                  <Button className='edit-button' icon={`./icon-edit.svg`} buttonName='Edit' onClick={() =>  dispatch(editComment({replyId: reply.id, isEditable: true}))} />
                 </div> :
                 <Button className='reply-button' icon={`./icon-reply.svg`} buttonName='Reply' onClick={() => { }} />
               }

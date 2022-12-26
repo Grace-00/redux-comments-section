@@ -16,7 +16,7 @@ export interface User {
     username: string
 }
 
-export type Replies = Omit<Comment, 'replies'> & { replyingTo: string }
+export type Replies = Omit<Comment, 'replies'> & { replyingTo: string; isEditable?: boolean }
 
 export interface Data {
     currentUser: User
@@ -88,6 +88,22 @@ const commentsSlice = createSlice({
                 }
             })
         },
+        editComment: (state, action) => {
+            const {replyId, isEditable} = action.payload
+
+            state.data?.comments.map(comment => {
+                if (comment.replies.length > 0) {
+
+                    const replies = comment.replies;
+                    replies.find(reply => {
+                        if(reply.id === replyId) {
+                            reply.isEditable = isEditable
+                        }
+                    })
+                }
+            })
+
+        },
     },
 })
 
@@ -95,6 +111,7 @@ export const {
     upvoteComment,
     downvoteComment,
     deleteComment,
+    editComment,
 } = commentsSlice.actions
 
 export default commentsSlice.reducer
