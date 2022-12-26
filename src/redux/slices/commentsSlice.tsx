@@ -38,11 +38,11 @@ interface CommentState {
     data: null | Data
 }
 
-const initialState = {
+export const initialState: CommentState = {
     loading: false,
     error: null,
     data: initialComments
-} as CommentState
+}
 
 const commentsSlice = createSlice({
     name: 'comments',

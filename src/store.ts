@@ -1,11 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import thunk from 'redux-thunk'
 import { logger } from 'redux-logger'
 
 import commentsReducer from './redux/slices/commentsSlice'
+import modalReducer from './redux/slices/modalSlice'
 
 export const store = configureStore({
-  reducer: commentsReducer,
+  reducer: combineReducers({comments: commentsReducer, modal: modalReducer}),
   middleware: [thunk, logger],
 })
 

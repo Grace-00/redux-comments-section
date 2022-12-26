@@ -22,7 +22,7 @@ interface ReplyProps {
 
 const Reply = (props: ReplyProps) => {
     const dispatch = useAppDispatch()
-    const getCurrentUser = useAppSelector(state => state.data?.currentUser.username)
+    const getCurrentUser = useAppSelector(state => state.comments.data?.currentUser.username)
     const { replyId, content, user, createdAt, score, isEditable, replyingTo } = props
     const [text, setText] = useState(content)
     return (

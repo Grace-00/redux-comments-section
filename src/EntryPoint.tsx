@@ -4,7 +4,7 @@ import { Comment } from './components/Comment'
 
 
 const EntryPoint: React.FC = () => {
-  const getInitialComments = useAppSelector(state => state.data?.comments)
+  const getInitialComments = useAppSelector(state => state.comments.data?.comments)
 
   return (
     <>
