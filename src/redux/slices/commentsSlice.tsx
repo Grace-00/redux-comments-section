@@ -102,8 +102,23 @@ const commentsSlice = createSlice({
                     })
                 }
             })
-
         },
+        updateComment: (state, action) => {
+            const {replyId, content, isEditable} = action.payload
+            console.log(replyId, content, isEditable)
+            state.data?.comments.map(comment => {
+                if (comment.replies.length > 0) {
+
+                    const replies = comment.replies;
+                    replies.find(reply => {
+                        if(reply.id === replyId) {
+                            reply.isEditable = isEditable
+                            reply.content = content
+                        }
+                    })
+                }
+            })
+        }
     },
 })
 
@@ -112,6 +127,7 @@ export const {
     downvoteComment,
     deleteComment,
     editComment,
+    updateComment
 } = commentsSlice.actions
 
 export default commentsSlice.reducer
