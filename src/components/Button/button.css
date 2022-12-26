@@ -34,6 +34,7 @@
     background-color: hsl(238, 40%, 52%);
     color: hsl(0, 0%, 100%);
     padding: 10 17;
+    margin-top: 16;
     border-radius: 8;
     cursor: pointer;
 }
