@@ -11,12 +11,12 @@ interface UserProps {
 }
 
 const User = (props: UserProps) => {
-  const getCurrentUser = useAppSelector(state => state.data?.currentUser.username)
+  const getCurrentUsername = useAppSelector(state => state.comments.data?.currentUser.username)
 
   return (
     <div className='user'>
       <img src={`./image-${props.user.username}.png`} alt={props.user.username} className='user-img'/>
-      {isCurrentUser(getCurrentUser, props.user.username) ?
+      {isCurrentUser(getCurrentUsername, props.user.username) ?
       <p className='user-name'>{props.user.username} <span className='currentUser-tag'>you</span></p> :
       <p className='user-name'>{props.user.username}</p>
     }

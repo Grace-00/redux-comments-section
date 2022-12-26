@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface ConfirmationModalState {
-    isOpened: boolean
+    isOpen: boolean
 }
 
 const initialConfirmationModalState: ConfirmationModalState = {
-    isOpened: false
+    isOpen: false
+
 }
 
 const modalSlice = createSlice({
@@ -14,6 +15,7 @@ const modalSlice = createSlice({
     reducers: {
         openModal: (state, action) => {
             console.log(state, action)
+            state.isOpen = !state.isOpen
         }
     }
 
