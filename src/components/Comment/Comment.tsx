@@ -24,7 +24,7 @@ interface CommentProps {
 
 const Comment = (props: CommentProps) => {
   const dispatch = useAppDispatch()  
-  const [newContent, setNewContent] = useState('')
+  const [newContent, setNewContent] = useState(`@${props.user.username},`)
   return (
 
     <>
