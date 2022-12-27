@@ -139,6 +139,32 @@ const commentsSlice = createSlice({
                 }
             })
             
+        },
+        addReply: (state, action) => {
+            const {content, replyId, replyingTo, username} = action.payload
+
+            state.data?.comments.map(comment => {
+                comment.replies.map(reply => {
+                    if(reply.id === replyId) {
+                        reply.hasReplied = false
+                        const newReply = {
+                            id: Math.random(),
+                            createdAt: Date.now().toString(), //turn milliseconds into date format
+                            score: 0,
+                            content: content,
+                            user: {
+                                username: username,
+                                image: {
+                                    png: '',
+                                    webp: ''
+                                }
+                            },
+                            replyingTo: replyingTo
+                        }
+                        comment.replies.push(newReply)
+                    }
+                })
+            })
         }
     },
 })
@@ -149,7 +175,8 @@ export const {
     deleteComment,
     editComment,
     updateComment,
-    reply
+    reply,
+    addReply
 } = commentsSlice.actions
 
 export default commentsSlice.reducer

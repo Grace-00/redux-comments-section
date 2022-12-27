@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux/selectors'
-import { deleteComment, downvoteComment, editComment, reply, updateComment, upvoteComment } from '../../redux/slices/commentsSlice'
+import { deleteComment, downvoteComment, editComment, reply, updateComment, upvoteComment, addReply } from '../../redux/slices/commentsSlice'
 import { openModal } from '../../redux/slices/modalSlice'
 import { isCurrentUser } from '../../utils'
 import { Button } from '../Button'
@@ -30,7 +30,7 @@ const Reply = (props: ReplyProps) => {
     const getCurrentUsername = useAppSelector(state => state.comments.data?.currentUser.username)
     const isModalOpen = useAppSelector(state => state.modal.isOpen)
     const currentUser = isCurrentUser(getCurrentUsername, user.username)
-    const [newContent, setNewContent] = useState(currentUser ? content : `@${props.user.username},`)
+    const [newContent, setNewContent] = useState(currentUser ? content : `@${props.user.username},`) //currentUser ? content : `@${props.user.username},`
 
     const handleDeleteComment = () => {        
         if(!isModalOpen) {
@@ -38,6 +38,9 @@ const Reply = (props: ReplyProps) => {
         }
     }
 
+    const handleReply = () => {
+        dispatch(addReply({replyId: replyId, content: newContent, replyingTo: '', username: getCurrentUsername}))
+    }
     return (
         <>
             <User user={user} createdAt={createdAt} />
@@ -74,7 +77,7 @@ const Reply = (props: ReplyProps) => {
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div></div>
-                        <Button className='reply-from-current-user-button' onClick={() => { }} buttonName='REPLY' />
+                        <Button className='reply-from-current-user-button' onClick={handleReply} buttonName='REPLY' />
                     </div>
                 </div>
             </ReplyFromCurrentUser>
