@@ -7,7 +7,7 @@ interface ReplyFromCurrentUser {
 
 const ReplyFromCurrentUser = (props: ReplyFromCurrentUser) => {
   return (
-    <div>{props.children}</div>
+    <div className='comment-wrapper'>{props.children}</div>
   )
 }
 
