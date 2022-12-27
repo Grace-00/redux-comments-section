@@ -14,7 +14,6 @@ const modalSlice = createSlice({
     initialState: initialConfirmationModalState,
     reducers: {
         openModal: (state, action) => {
-            console.log(state, action)
             state.isOpen = !state.isOpen
         }
     }

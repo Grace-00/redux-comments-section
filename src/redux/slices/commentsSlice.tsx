@@ -110,7 +110,7 @@ const commentsSlice = createSlice({
         },
         updateComment: (state, action) => {
             const {replyId, content, isEditable} = action.payload
-            console.log(replyId, content, isEditable)
+ 
             state.data?.comments.map(comment => {
                 if (comment.replies.length > 0) {
 
