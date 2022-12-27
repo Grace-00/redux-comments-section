@@ -22,7 +22,7 @@ const Modal = ({ children }: ModalProps) => {
     };
   }, []);
 
-  return createPortal(<div>{children}</div>, elRef.current); //className="modal"
+  return createPortal(<div className="modal">{children}</div>, elRef.current);
 }
 
 export default Modal

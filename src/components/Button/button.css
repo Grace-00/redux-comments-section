@@ -39,8 +39,17 @@
     cursor: pointer;
 }
 
+.cancel-confirmation-modal-btn,
+.delete-confirmation-modal-btn {
+    padding: 12 34.5;
+    border-radius: 8;
+    color:hsl(0, 0%, 100%);
+    cursor: pointer;
+}
+
 .cancel-confirmation-modal-btn {
     background-color: hsl(211, 10%, 45%);
+
 }
 
 .delete-confirmation-modal-btn {
