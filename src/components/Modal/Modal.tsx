@@ -1,20 +1,28 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-import React from 'react'
-import { Button } from '../Button'
+import { useEffect, useRef, ReactNode } from "react";
+import { createPortal } from "react-dom";
 import './modal.css'
 
-const Modal = () => {    
-  return (
-      <div>
-          <h4 style={{ color: 'hsl(212, 24%, 26%)', fontWeight: 500, fontSize: 20, lineHeight: 23.7 }}>Delete Comment</h4>
-          <p>Are you sure you want to delete this comment?
-              This will remove the comment and can’t be undone.</p>
-          <div style={{ display: 'flex' }}>
-              <Button className='cancel-confirmation-modal-btn' buttonName='NO, CANCEL' onClick={() => { }} />
-              <Button className='delete-confirmation-modal-btn' buttonName='YES, DELETE' onClick={() => { }} />
-          </div>
-      </div>
-  )
+const modalRoot = document.getElementById('modal') as HTMLElement;
+
+type ModalProps = {
+  children: ReactNode
+};
+
+const Modal = ({ children }: ModalProps) => {
+  // create div element only once using ref
+  const elRef = useRef<HTMLDivElement | null>(null);
+  if (!elRef.current) elRef.current = document.createElement("div");
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const el = elRef.current!; // non-null assertion because it will never be null
+    modalRoot.appendChild(el);
+    return () => {
+      modalRoot.removeChild(el);
+    };
+  }, []);
+
+  return createPortal(<div>{children}</div>, elRef.current); //className="modal"
 }
 
 export default Modal

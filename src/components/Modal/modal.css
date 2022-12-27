@@ -1,7 +1,12 @@
-.cancel-confirmation-modal-btn {
-    background-color: hsl(211, 10%, 45%);
-}
-
-.delete-confirmation-modal-btn {
-    background-color: hsl(358, 79%, 66%);
+.modal {
+    background-color: rgba(0,0,0,0.9);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
