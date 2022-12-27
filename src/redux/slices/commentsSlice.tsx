@@ -141,7 +141,28 @@ const commentsSlice = createSlice({
             
         },
         addReply: (state, action) => {
-            const {content, replyId, replyingTo, username} = action.payload
+            const {content, replyId, commentId, replyingTo, username} = action.payload
+            state.data?.comments.find(comment => {
+                if(comment.id === commentId) {
+                    comment.hasReplied = false
+                    const newReply = {
+                        id: Math.random(),
+                        createdAt: Date.now().toString(), //turn milliseconds into date format
+                        score: 0,
+                        content: content,
+                        user: {
+                            username: username,
+                            image: {
+                                png: '',
+                                webp: ''
+                            }
+                        },
+                        replyingTo: replyingTo,
+                        replies: []
+                    }
+                    state.data?.comments.push(newReply)
+                }
+            })
 
             state.data?.comments.map(comment => {
                 comment.replies.map(reply => {

@@ -5,8 +5,8 @@ import { Rating } from '../Rating'
 import { Button } from '../Button'
 import { Content } from '../Content'
 import { Reply } from '../Reply'
-import { useAppDispatch } from '../../redux/selectors'
-import { Replies, upvoteComment, downvoteComment, reply } from '../../redux/slices/commentsSlice'
+import { useAppDispatch, useAppSelector } from '../../redux/selectors'
+import { Replies, upvoteComment, downvoteComment, reply, addReply } from '../../redux/slices/commentsSlice'
 import { ReplyFromCurrentUser } from '../ReplyFromCurrentUser'
 import { EditableContent } from '../EditableContent'
 import './comment.css'
@@ -24,6 +24,7 @@ interface CommentProps {
 
 const Comment = (props: CommentProps) => {
   const dispatch = useAppDispatch()  
+  const getCurrentUsername = useAppSelector(state => state.comments.data?.currentUser.username)
   const [newContent, setNewContent] = useState(`@${props.user.username},`)
   return (
 
@@ -37,6 +38,7 @@ const Comment = (props: CommentProps) => {
             <h4>{props.score}</h4>
             <Button className='icon-button' icon={`./icon-minus.svg`} onClick={() => dispatch(downvoteComment(props.commentId))} />
           </Rating>
+          {/* ADD BUTTON DELETE - EDIT WHEN ON REPLY */}
           <Button className='reply-button' icon={`./icon-reply.svg`} buttonName='Reply' onClick={() => dispatch(reply(props.commentId))} />
         </div>
       </div>
@@ -49,7 +51,7 @@ const Comment = (props: CommentProps) => {
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div></div>
-            <Button className='reply-from-current-user-button' onClick={() => { }} buttonName='REPLY' />
+            <Button className='reply-from-current-user-button' onClick={() =>  dispatch(addReply({commentId: props.commentId, content: newContent, replyingTo: '', username: getCurrentUsername}))} buttonName='REPLY' />
           </div>
         </div>
       </ReplyFromCurrentUser>
