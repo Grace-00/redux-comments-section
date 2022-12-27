@@ -29,6 +29,7 @@ export interface Comment {
     createdAt: string
     score: number
     user: User
+    hasReplied?: boolean
     replies: Replies[]
 }
 
@@ -122,6 +123,22 @@ const commentsSlice = createSlice({
                     })
                 }
             })
+        },
+        reply: (state, action) => {
+
+            state.data?.comments.find(comment => {   
+                if(comment.replies) {
+                    comment.replies.map(reply => {
+                        if(reply.id === action.payload) {
+                            reply.hasReplied = !reply.hasReplied
+                        }
+                    })
+                }             
+                if(comment.id === action.payload) {
+                    comment.hasReplied = !comment.hasReplied
+                }
+            })
+            
         }
     },
 })
@@ -131,7 +148,8 @@ export const {
     downvoteComment,
     deleteComment,
     editComment,
-    updateComment
+    updateComment,
+    reply
 } = commentsSlice.actions
 
 export default commentsSlice.reducer

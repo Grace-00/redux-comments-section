@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux/selectors'
-import { deleteComment, downvoteComment, editComment, updateComment, upvoteComment } from '../../redux/slices/commentsSlice'
+import { deleteComment, downvoteComment, editComment, reply, updateComment, upvoteComment } from '../../redux/slices/commentsSlice'
 import { openModal } from '../../redux/slices/modalSlice'
 import { isCurrentUser } from '../../utils'
 import { Button } from '../Button'
@@ -9,6 +9,7 @@ import { Content } from '../Content'
 import { EditableContent } from '../EditableContent'
 import { Modal } from '../Modal'
 import { Rating } from '../Rating'
+import { ReplyFromCurrentUser } from '../ReplyFromCurrentUser'
 import { User } from '../User'
 import './reply.css'
 
@@ -20,6 +21,7 @@ interface ReplyProps {
     readonly isEditable?: boolean
     readonly replyingTo: string
     readonly replyId: number
+    readonly hasReplied?: boolean
 }
 
 const Reply = (props: ReplyProps) => {
@@ -28,7 +30,7 @@ const Reply = (props: ReplyProps) => {
     const getCurrentUsername = useAppSelector(state => state.comments.data?.currentUser.username)
     const isModalOpen = useAppSelector(state => state.modal.isOpen)
     const currentUser = isCurrentUser(getCurrentUsername, user.username)
-    const [newContent, setNewContent] = useState(content)
+    const [newContent, setNewContent] = useState('')
 
     const handleDeleteComment = () => {        
         if(!isModalOpen) {
@@ -61,9 +63,22 @@ const Reply = (props: ReplyProps) => {
                             </div>}
                     </>
                     :
-                    <Button className='reply-button' icon={`./icon-reply.svg`} buttonName='Reply' onClick={() => { }} />
+                    <Button className='reply-button' icon={`./icon-reply.svg`} buttonName='Reply' onClick={() => dispatch(reply(replyId))} />
                 }
             </div>
+            {props.hasReplied && <ReplyFromCurrentUser>
+                <div className='comment'>
+                    <div className='reply-from-current-user'>
+                        <img src='./image-juliusomo.png' alt='juliusomo' className='user-img' />
+                        <EditableContent onChange={(e) => setNewContent(e.target.value)} value={newContent} />
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div></div>
+                        <Button className='reply-from-current-user-button' onClick={() => { }} buttonName='REPLY' />
+                    </div>
+                </div>
+            </ReplyFromCurrentUser>
+            }
             {isModalOpen && currentUser &&
                 <Modal>
                     <div style={{backgroundColor: 'hsl(0, 0%, 100%)', padding: 25, borderRadius: 8, maxWidth: 400}}>

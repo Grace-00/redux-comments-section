@@ -8,3 +8,7 @@
 .reply {
     margin-left: 34;
 }
+
+.reply-from-current-user {
+    display: flex;
+}
