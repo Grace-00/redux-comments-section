@@ -30,7 +30,7 @@ const Reply = (props: ReplyProps) => {
     const getCurrentUsername = useAppSelector(state => state.comments.data?.currentUser.username)
     const isModalOpen = useAppSelector(state => state.modal.isOpen)
     const currentUser = isCurrentUser(getCurrentUsername, user.username)
-    const [newContent, setNewContent] = useState(`@${props.user.username},`)
+    const [newContent, setNewContent] = useState(currentUser ? content : `@${props.user.username},`)
 
     const handleDeleteComment = () => {        
         if(!isModalOpen) {
