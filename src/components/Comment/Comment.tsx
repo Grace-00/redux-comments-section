@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { useState } from 'react'
 import { User } from '../User'
 import { Rating } from '../Rating'
@@ -6,7 +5,7 @@ import { Button } from '../Button'
 import { Content } from '../Content'
 import { Reply } from '../Reply'
 import { useAppDispatch, useAppSelector } from '../../redux/selectors'
-import { Replies, upvoteComment, downvoteComment, reply, addReply } from '../../redux/slices/commentsSlice'
+import { Replies, reply, addReply, upvote, downvote } from '../../redux/slices/commentsSlice'
 import { ReplyFromCurrentUser } from '../ReplyFromCurrentUser'
 import { EditableContent } from '../EditableContent'
 import './comment.css'
@@ -34,9 +33,9 @@ const Comment = (props: CommentProps) => {
         <Content content={props.content} />
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Rating className='rating-wrapper'>
-            <Button className='icon-button' icon={`./icon-plus.svg`} onClick={() => dispatch(upvoteComment(props.commentId))} />
+            <Button className='icon-button' icon={`./icon-plus.svg`} onClick={() => dispatch(upvote({commentId: props.commentId, parentComment: false}))} />
             <h4>{props.score}</h4>
-            <Button className='icon-button' icon={`./icon-minus.svg`} onClick={() => dispatch(downvoteComment(props.commentId))} />
+            <Button className='icon-button' icon={`./icon-minus.svg`} onClick={() => dispatch(downvote({commentId: props.commentId, parentComment: false}))} />
           </Rating>
           {/* ADD BUTTON DELETE - EDIT WHEN ON REPLY */}
           <Button className='reply-button' icon={`./icon-reply.svg`} buttonName='Reply' onClick={() => dispatch(reply(props.commentId))} />

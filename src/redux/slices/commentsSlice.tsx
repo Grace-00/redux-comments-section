@@ -1,6 +1,5 @@
 
 import { createSlice } from "@reduxjs/toolkit";
-
 import initialCommentsRaw from '../../data.json'
 
 const initialComments: Data = initialCommentsRaw
@@ -16,7 +15,7 @@ export interface User {
     username: string
 }
 
-export type Replies = Omit<Comment, 'replies'> & { replyingTo: string; isEditable?: boolean }
+export type Replies = Omit<Comment, 'replies'> & { replyingTo: string; isEditable?: boolean; parentComment?: boolean }
 
 export interface Data {
     currentUser: User
@@ -49,37 +48,35 @@ const commentsSlice = createSlice({
     name: 'comments',
     initialState: initialState,
     reducers: {
-        upvoteComment: (state, action) => {
-            state.data?.comments.map(comment => {
-                if (comment.replies.length > 0) {
-                    comment.replies.map(reply => {
-                        if(reply.id === action.payload) {
-                            reply.score += 1
-                        }
-                    })
+        upvote: (state, action) => {
+            const { commentId, replyId, parentComment } = action.payload
+
+            if (!parentComment) {
+                const commentToUpvote = state.data?.comments.find(comment => comment.id === commentId)
+                if (commentToUpvote !== undefined) {
+                    commentToUpvote.score += 1
                 }
-                if (comment.id === action.payload) {
-                        comment.score += 1
+            } else {
+               const replyToUpvote = state.data?.comments.map(comment => comment.replies).flat().find(reply => reply.id === replyId)
+                if (replyToUpvote !== undefined) {    
+                    replyToUpvote.score +=1 
                 }
-            })
+            }
         },
-        downvoteComment: (state, action) => {
-            state.data?.comments.map(comment => {
-                if (comment.replies.length > 0) {
-                    comment.replies.map(reply => {
-                        if(reply.id === action.payload) {
-                            if(reply.score > 0) {
-                                reply.score -= 1
-                            }
-                        }
-                    })
+        downvote: (state, action) => {
+            const { commentId, replyId, parentComment } = action.payload
+
+            if (!parentComment) {
+                const commentToDownvote = state.data?.comments.find(comment => comment.id === commentId)
+                if (commentToDownvote !== undefined && commentToDownvote.score > 0) {
+                    commentToDownvote.score -= 1
                 }
-                if (comment.id === action.payload) {
-                    if(comment.score > 0) {
-                        comment.score -= 1
-                    }
+            } else {
+               const replyToDownvote = state.data?.comments.map(comment => comment.replies).flat().find(reply => reply.id === replyId)
+                if (replyToDownvote !== undefined && replyToDownvote.score > 0) {    
+                    replyToDownvote.score -=1 
                 }
-            })
+            }
         },
         deleteComment: (state, action) => {
             state.data?.comments.map(comment => {
@@ -191,8 +188,8 @@ const commentsSlice = createSlice({
 })
 
 export const {
-    upvoteComment,
-    downvoteComment,
+    upvote,
+    downvote,
     deleteComment,
     editComment,
     updateComment,

@@ -9,6 +9,7 @@ import { Button } from './components/Button'
 
 const EntryPoint: React.FC = () => {
   const getInitialComments = useAppSelector(state => state.comments.data?.comments)
+
   const [newContent, setNewContent] = useState('')
   return (
     <>

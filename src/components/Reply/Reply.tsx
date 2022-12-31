@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux/selectors'
-import { deleteComment, downvoteComment, editComment, reply, updateComment, upvoteComment, addReply } from '../../redux/slices/commentsSlice'
+import { deleteComment, downvote, editComment, reply, updateComment, upvote, addReply } from '../../redux/slices/commentsSlice'
 import { openModal } from '../../redux/slices/modalSlice'
 import { isCurrentUser } from '../../utils'
 import { Button } from '../Button'
@@ -54,13 +54,13 @@ const Reply = (props: ReplyProps) => {
                     <Button
                         className='icon-button'
                         icon={`./icon-plus.svg`}
-                        onClick={() => dispatch(upvoteComment(replyId))}
+                        onClick={() => dispatch(upvote({replyId: replyId, parentComment:true}))}
                     />
                     <h4>{score}</h4>
                     <Button
                         className='icon-button'
                         icon={`./icon-minus.svg`}
-                        onClick={() => dispatch(downvoteComment(replyId))}
+                        onClick={() => dispatch(downvote({replyId: replyId, parentComment:true}))}
                     />
                 </Rating>
                 {currentUser ?
