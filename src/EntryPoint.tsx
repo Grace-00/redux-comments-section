@@ -29,7 +29,8 @@ const EntryPoint: React.FC = () => {
         )
       })}
       
-      <ReplyFromCurrentUser>
+      {/* add onClick logic */}
+      {/* <ReplyFromCurrentUser>
         <div className='comment'>
           <div className='reply-from-current-user'>
             <img src='./image-juliusomo.png' alt='juliusomo' className='user-img' />
@@ -40,7 +41,7 @@ const EntryPoint: React.FC = () => {
             <Button className='reply-from-current-user-button' onClick={() => { }} buttonName='SEND' />
           </div>
         </div>
-      </ReplyFromCurrentUser>
+      </ReplyFromCurrentUser> */}
     </>
   )
 }
