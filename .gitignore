@@ -4,7 +4,6 @@ dist/
 .env
 .DS_Store
 .vscode/
-src/design/
 src/images/
 static/
 TIL.md
