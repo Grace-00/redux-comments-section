@@ -140,7 +140,7 @@ const commentsSlice = createSlice({
                     comment.hasReplied = false
                     const newReply = {
                         id: Math.random(),
-                        createdAt: Date.now().toString(), //turn milliseconds into date format
+                        createdAt: new Date().toLocaleString(),
                         score: 0,
                         content: content,
                         user: {
@@ -163,7 +163,7 @@ const commentsSlice = createSlice({
                         reply.hasReplied = false
                         const newReply = {
                             id: Math.random(),
-                            createdAt: Date.now().toString(), //turn milliseconds into date format
+                            createdAt: new Date().toLocaleString(),
                             score: 0,
                             content: content,
                             user: {
