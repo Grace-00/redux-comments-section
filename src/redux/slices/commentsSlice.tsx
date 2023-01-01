@@ -78,15 +78,11 @@ const commentsSlice = createSlice({
                 }
             }
         },
-        deleteComment: (state, action) => {
+        deleteReply: (state, action) => {
             state.data?.comments.map(comment => {
-                if (comment.replies.length > 0) {                    
+                if (comment.replies.length > 0) {
                     const filteredReplies = comment.replies.filter(reply => reply.id !== action.payload)
-                    state.data?.comments.map(comment => {
-                        if(comment.replies.length > 0) {
-                            comment.replies = filteredReplies
-                        }
-                    })
+                    comment.replies = filteredReplies
                 }
             })
         },
@@ -190,7 +186,7 @@ const commentsSlice = createSlice({
 export const {
     upvote,
     downvote,
-    deleteComment,
+    deleteReply,
     editComment,
     updateComment,
     reply,

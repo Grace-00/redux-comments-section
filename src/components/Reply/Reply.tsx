@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux/selectors'
-import { deleteComment, downvote, editComment, reply, updateComment, upvote, addReply } from '../../redux/slices/commentsSlice'
+import { deleteReply, downvote, editComment, reply, updateComment, upvote, addReply } from '../../redux/slices/commentsSlice'
 import { openModal } from '../../redux/slices/modalSlice'
 import { isCurrentUser } from '../../utils'
 import { Button } from '../Button'
@@ -125,7 +125,7 @@ const Reply = (props: ReplyProps) => {
                             <Button
                                 className='delete-confirmation-modal-btn'
                                 buttonName='YES, DELETE'
-                                onClick={() => dispatch(deleteComment(replyId))}
+                                onClick={() => dispatch(deleteReply(replyId))}
                             />
                         </div>
                     </div>
