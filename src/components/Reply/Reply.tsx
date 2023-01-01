@@ -27,15 +27,10 @@ const Reply = (props: ReplyProps) => {
     const dispatch = useAppDispatch()
     const { replyId, content, user, createdAt, score, isEditable, replyingTo } = props
     const getCurrentUsername = useAppSelector(state => state.comments.data?.currentUser.username)
-    const showModal = useAppSelector(state => state.modal.isOpen)
+    //const showModal = useAppSelector(state => state.modal.isOpen)
     const currentUser = isCurrentUser(getCurrentUsername, user.username)
     const [newContent, setNewContent] = useState(currentUser ? content : `@${props.user.username},`)
-
-    const handleDeleteComment = () => {
-        if (!showModal) {
-            dispatch(openModal(true))
-        }
-    }
+    const [showModal, setShowModal] = useState(false)
 
     const handleReply = () => {
         dispatch(addReply({ replyId: replyId, content: newContent, replyingTo: '', username: getCurrentUsername }))
@@ -75,7 +70,7 @@ const Reply = (props: ReplyProps) => {
                                     className='delete-button'
                                     icon={`./icon-delete.svg`}
                                     buttonName='Delete'
-                                    onClick={() => handleDeleteComment()}
+                                    onClick={() => setShowModal(true)}
                                 />
                                 <Button
                                     className='edit-button'
@@ -109,7 +104,7 @@ const Reply = (props: ReplyProps) => {
                 </div>
             </ReplyFromCurrentUser>
             }
-            {showModal && currentUser &&
+            {showModal &&
                 <Modal>
                     <div style={{ backgroundColor: 'hsl(0, 0%, 100%)', padding: 25, borderRadius: 8, maxWidth: 400 }}>
                         <h4 style={{ color: 'hsl(212, 24%, 26%)', fontWeight: 500, fontSize: 20 }}>Delete Comment</h4>
@@ -120,7 +115,7 @@ const Reply = (props: ReplyProps) => {
                             <Button
                                 className='cancel-confirmation-modal-btn'
                                 buttonName='NO, CANCEL'
-                                onClick={() => dispatch(openModal(false))}
+                                onClick={() => setShowModal(false)}
                             />
                             <Button
                                 className='delete-confirmation-modal-btn'
